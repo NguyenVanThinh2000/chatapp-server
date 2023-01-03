@@ -1,14 +1,19 @@
 const User = require("../models/User");
-const userGetAll = (req, res) => {
+const createUser = (req, res) => {
+  User.find({}, { name: true, email: true }, (error, users) => {
+    res.json(users);
+  });
+};
+const getAll = (req, res) => {
   User.find({}, { name: true, email: true }, (error, users) => {
     res.json(users);
   });
 };
 
-const userGetById = (req, res) => {
-  console.log(req);
-  User.findById(req.id, (error, user) => {
+const getUserById = (req, res) => {
+  console.log(req.body);
+  User.findById(req.body.id, (error, user) => {
     res.json(user);
   });
 };
-module.exports = { userGetAll };
+module.exports = { getAll, getUserById, createUser };

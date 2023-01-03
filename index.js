@@ -4,18 +4,24 @@ const express = require("express");
 const http = require("http");
 const { Server } = require("socket.io");
 const route = require("./src/routes");
+const bodyParser = require("body-parser");
 
 const db = require("./src/config/db");
 db.connect();
 
 const app = express();
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
 const server = http.createServer(app);
 
 // Route init
 route(app);
-
+// app.post("/test", upload.array(), (req, res) => {
+//   console.log(req.body);
+//   res.json(req.body);
+// });
 // using socket.io
 // const io = new Server(server, {
 //   cors: {

@@ -1,9 +1,16 @@
+const multer = require("multer");
+const upload = multer();
 const express = require("express");
 const router = express.Router();
 
-const { userGetAll } = require("../app/controllers/UserController");
+const {
+  getAll,
+  getUserById,
+  createUser,
+} = require("../app/controllers/UserController");
 
-router.use("/getAll", userGetAll);
-router.use("/getUser", userGetAll);
+router.use("/createUser", upload.array(), createUser);
+router.use("/getAll", getAll);
+router.post("/getUserById", upload.array(), getUserById);
 
 module.exports = router;
