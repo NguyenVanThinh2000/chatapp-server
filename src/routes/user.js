@@ -7,10 +7,15 @@ const {
   getAll,
   getUserById,
   createUser,
+  updateUser,
+  deleteUser,
 } = require("../app/controllers/UserController");
 
-router.use("/createUser", upload.array(), createUser);
+router.post("/create", upload.array(), createUser);
+router.patch("/:id", upload.array(), updateUser);
+router.delete("/:id", deleteUser);
+
 router.use("/getAll", getAll);
-router.post("/getUserById", upload.array(), getUserById);
+router.get("/:id", getUserById);
 
 module.exports = router;
